@@ -1,0 +1,12 @@
+command: "python3 programs/intro/hello_world.py"
+
+jobs:
+  # Run `command` using `simple_local_config` (defined in `yaml_files/configs/intro.yaml`)
+  - config: "simple_local_config"
+    config_jobs:
+      - tag: "really_simple" # We will use `tags` later
+
+  # Run `command` using `custom_env_local_config` (defined in `yaml_files/configs/intro.yaml`)
+  - config: "custom_env_local_config"
+    config_jobs:
+      - tag: "wow"

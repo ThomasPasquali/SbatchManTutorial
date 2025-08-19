@@ -1,0 +1,44 @@
+variables:
+  threads: [1, 2, 4, 8, 16]
+  baldo_threads: [1, 2, 4, 8]
+
+# A config file can have configurations for multiple machines
+local:
+  scheduler: local
+
+  configs:
+    # The {threads} symbol is a wildcard that will be substituted
+    - name: "{threads}_threads"
+      env:
+        - "OMP_NUM_THREADS={threads}"
+
+
+# TODO customize for you cluster
+baldo:
+  scheduler: slurm
+
+  # Same parameter names than SLURM uses (in most cases)
+  # Full list here: https://sbatchman.readthedocs.io/en/latest/learn/configuration/#slurm
+  default_conf:
+    nodes: 1                # single node
+    ntasks: 1               # single task
+    time: "00:01:00"        # 1 min walltime 
+    gpus: 0                 # no need for GPUs
+    partition: "edu-short"  # cluster-specific config
+
+  # Here the cartesian product between `threads` and `baldo_threads`
+  # is not performed since not string as both variables as dependencies
+  configs:
+    - name: "{baldo_threads}_threads"
+      # Add/Override default conf
+      cpus_per_task: "{baldo_threads}"
+      env:
+        - "OMP_NUM_THREADS={baldo_threads}"
+
+    # This is a workaround for limitations imposed by SLURM on baldo
+    # i.e. you can request up to 8 CPU with 0 GPUs and up to 12 with 1 GPU
+    - name: "16_threads"
+      cpus_per_task: "16"
+      gpus: 2 # THIS OVERRIDES THE DEFAULT
+      env:
+        - "OMP_NUM_THREADS=16"

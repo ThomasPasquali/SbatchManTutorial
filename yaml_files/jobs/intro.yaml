@@ -1,0 +1,17 @@
+jobs:
+  # This is the same config as before
+  - config: "simple_local_config"
+    config_jobs:
+      - tag: "hello_world" # This time we use tags to differentiate jobs using the same config
+        # We manually specify `command` for each tag. Later we will see a better way to do so
+        command: "python3 programs/intro/hello_world.py"
+
+      - tag: "this_fails" # exitcode != 0
+        command: "python3 programs/intro/fail.py"
+
+  # This config has a timeout of 5 seconds
+  - config: "local_config_timeout"
+    # You can specify `command` here as well (shared across all tags)
+    command: "python3 programs/intro/timeout.py"
+    config_jobs:
+      - tag: "this_takes_10_mins"

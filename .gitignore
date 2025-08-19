@@ -1,0 +1,5 @@
+.venv/
+SbatchMan/
+
+programs/pi/compute_pi_*
+pi_results.csv

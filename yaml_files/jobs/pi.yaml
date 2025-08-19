@@ -1,0 +1,12 @@
+variables:
+  # SbatchMan will compute the cartesian product of these values
+  dtype: [float, double, float16]
+  threads: [1, 2, 4, 8, 16]
+  samples: [100, 100000, 10000000, 50000000]
+
+command: "programs/pi/compute_pi_{dtype} {samples}"
+
+jobs:
+  - config: "{threads}_threads"
+    config_jobs:
+      - tag: "{dtype}_{samples}"

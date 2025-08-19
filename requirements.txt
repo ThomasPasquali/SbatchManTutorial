@@ -1,0 +1,4 @@
+pipx
+sbatchman
+matplotlib
+pandas
