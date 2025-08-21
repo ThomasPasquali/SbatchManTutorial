@@ -37,6 +37,7 @@ def jobs_to_dataframe(jobs):
             "runtime": runtime,
             "job_id": job.job_id,
             "status": job.status,
+            "cluster": sbm.get_cluster_name(),
         })
     
     return pd.DataFrame(rows)
