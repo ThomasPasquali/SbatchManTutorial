@@ -1,17 +1,17 @@
-local:
+mypc:
   # Tell SbatchMan to run directly (no SLURM / PBS)
   scheduler: local
 
   configs:
     # 1st config
-    - name: "simple_local_config"
+    - name: "simple_mypc_config"
 
     # 2nd config (spanish vibes)
-    - name: "custom_env_local_config"
+    - name: "custom_env_mypc_config"
       env:
         - "HELLO=Hola"
 
     # 3rd config (we don't want programs that run for too long)
-    - name: "local_config_timeout"
+    - name: "mypc_config_timeout"
       time: "00:00:05" # Timeout in HH:mm:ss or D-HH:mm:ss
       # In this case, 5s

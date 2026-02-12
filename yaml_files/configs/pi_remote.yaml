@@ -3,7 +3,7 @@ variables:
   baldo_threads: [1, 2, 4, 8]
 
 # A config file can have configurations for multiple machines
-local:
+mypc:
   scheduler: local
 
   configs:
