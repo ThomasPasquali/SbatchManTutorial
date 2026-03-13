@@ -1,0 +1,17 @@
+variables:
+  # This variable will automatically expand into:
+  # - {experiment}:           the absolute path of files in the `test_files/` directory
+  # - {experiment_filename}:  the stem of files in the `test_files/` directory
+  experiment: "test_files"
+
+jobs:
+  - config: "simple_mypc_config"
+    config_jobs:
+      # Here, the cartesian product of values of {experiment} and {experiment_filename}
+      # will NOT be performed since the two variables have the same semantic 
+      - tag: "{experiment_filename}"
+        command: "cat {experiment}"
+
+      # This will work even if you only use the {*_filename} variable
+      - tag: "{experiment_filename}_only_filename"
+        command: "echo \"Filename: {experiment_filename}\""
