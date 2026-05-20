@@ -1,0 +1,34 @@
+variables:
+
+  threads:
+    # If no default value is specified,
+    # if your "cluster name" is not 'mypc1' or 'mypc2',
+    # the `configure` command will fail
+    default: [1]
+    per_cluster:
+      mypc1: [2]
+      mypc2: [4]
+
+
+mypc1:
+  scheduler: local
+  configs:
+    - name: "{threads}_threads"
+      env:
+        - "OMP_NUM_THREADS={threads}"
+
+
+mypc2:
+  scheduler: local
+  configs:
+    - name: "{threads}_threads"
+      env:
+        - "OMP_NUM_THREADS={threads}"
+
+
+mypcDefaultArgs:
+  scheduler: local
+  configs:
+    - name: "1_threads"
+      env:
+        - "OMP_NUM_THREADS=1"

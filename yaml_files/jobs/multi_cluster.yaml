@@ -1,0 +1,23 @@
+variables:
+
+  # In this example, we use the cluster name
+  # (set using the `sbatchman set-cluster-name command`)
+  threads:
+    default: [1]
+    per_cluster:
+      mypc1: [2]
+      mypc2: [4]
+
+  arg:
+    default: ['defaultArg']
+    per_cluster:
+      mypc1: ['mypc1_arg1', 'mypc1_arg2']
+      mypc2: ['mypc2_arg']
+
+
+command: "python multi_cluster.py {arg}"
+
+jobs:
+  - config: "{threads}_threads"
+    config_jobs:
+      - tag: "threads-{threads}_arg-{arg}"
