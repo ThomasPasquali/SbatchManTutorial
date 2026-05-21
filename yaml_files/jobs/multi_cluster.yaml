@@ -6,7 +6,7 @@ variables:
     default: [1]
     per_cluster:
       mypc1: [2]
-      mypc2: [4]
+      mypc2: [4, 6]
 
   arg:
     default: ['defaultArg']
@@ -14,10 +14,15 @@ variables:
       mypc1: ['mypc1_arg1', 'mypc1_arg2']
       mypc2: ['mypc2_arg']
 
+  arg_map:
+    default: ['def_subArg']
+    map:
+      mypc1_arg1: ['mypc1_arg1_subArg_1', 'mypc1_arg1_subArg_2']
 
-command: "python multi_cluster.py {arg}"
+
+command: "python multi_cluster.py {arg} {arg_map[arg]}"
 
 jobs:
   - config: "{threads}_threads"
     config_jobs:
-      - tag: "threads-{threads}_arg-{arg}"
+      - tag: "threads-{threads}_arg-{arg}_{arg_map[arg]}"

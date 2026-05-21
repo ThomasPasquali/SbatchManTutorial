@@ -7,8 +7,13 @@ variables:
     default: [1]
     per_cluster:
       mypc1: [2]
-      mypc2: [4]
+      mypc2: [4, 6]
 
+  variant:
+    default: ['defaultVariant'] 
+    map:
+      4: ['4threads_variant_1', '4threads_variant_2']
+      6: ['6threads_only_variant']
 
 mypc1:
   scheduler: local
@@ -24,6 +29,12 @@ mypc2:
     - name: "{threads}_threads"
       env:
         - "OMP_NUM_THREADS={threads}"
+    
+
+    - name: "{threads}_threads_{variant[threads]}"
+      env:
+        - "OMP_NUM_THREADS={threads}"
+        - 'VARIANT_NAME="{variant[threads]}"'
 
 
 mypcDefaultArgs:
