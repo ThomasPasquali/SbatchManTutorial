@@ -1,0 +1,17 @@
+variables:
+  dtype:
+    - float
+    - double
+    - char
+
+jobs:
+  - config: "compile_gcc" # This sets the CC env variable to gcc
+    config_jobs:
+
+      - tag: "compile_with_{dtype}"
+        command: '$CC -fopenmp -o bin/mem_bandwidth_{dtype} -DDTYPE={dtype} mem_bandwidth.c'
+        check: '[[ -f "bin/mem_bandwidth_{dtype}" ]]'
+
+      - tag: "compile_with_no_dtype"
+        command: "$CC -fopenmp -o bin/mem_bandwidth mem_bandwidth.c"
+        check: '[[ -f "bin/mem_bandwidth" ]]'

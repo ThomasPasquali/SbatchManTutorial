@@ -32,6 +32,7 @@ mypc2:
     
 
     - name: "{threads}_threads_{variant[threads]}"
+      scheduler: slurm
       env:
         - "OMP_NUM_THREADS={threads}"
         - 'VARIANT_NAME="{variant[threads]}"'

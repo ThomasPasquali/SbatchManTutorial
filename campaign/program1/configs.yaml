@@ -1,0 +1,23 @@
+variables:
+
+  threads:
+    default: [1]
+    per_cluster:
+      cluster-a: [2, 4]
+      cluster-b: [4, 8]
+
+
+cluster-a:
+  scheduler: local
+  configs:
+    - name: "{threads}_threads"
+      env:
+        - "OMP_NUM_THREADS={threads}"
+
+
+cluster-b:
+  scheduler: local
+  configs:
+    - name: "{threads}_threads"
+      env:
+        - "OMP_NUM_THREADS={threads}"

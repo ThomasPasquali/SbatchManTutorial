@@ -1,0 +1,6 @@
+cluster-a:
+  scheduler: local
+  configs:
+    - name: "compile_gcc"
+      env:
+        - "CC=gcc"

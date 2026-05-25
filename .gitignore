@@ -1,6 +1,8 @@
 .venv/
 SbatchMan/
 test/
+campaign_results/
 
 programs/pi/compute_pi_*
+campaign/program1/bin/
 pi_results.csv

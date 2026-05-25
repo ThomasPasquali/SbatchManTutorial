@@ -1,0 +1,41 @@
+apps:
+  - name: app1
+    dir: ./campaign/program1
+    
+    # Optional: wait for all steps before moving to next app
+    blocking: false
+    
+    # Optional: cluster filtering
+    cluster_whitelist:
+      - cluster-a
+    # cluster_blacklist:
+    #   - cluster-b
+    
+    # Optional: sbatchman configure config files (relative to app dir)
+    configs:
+      - configs.yaml
+      - configs_compile.yaml
+    
+    # Optional: directory to copy alongside SbatchMan results
+    results_dir: ./my_results
+    
+    # Steps executed sequentially
+    steps:
+      - name: compile
+        script: "mkdir -p bin"
+        jobs: compile.yaml
+        on_fails: terminate  # default: terminate
+        
+      - name: experiments
+        jobs: jobs.yaml
+        on_fails: skip       # terminate | continue | skip
+
+  - name: app2
+    dir: ./campaign/program2
+    blocking: true
+    configs: configs.yaml
+    
+    steps:
+      - name: matmul
+        jobs: jobs.yaml
+        on_fails: continue

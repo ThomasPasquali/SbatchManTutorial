@@ -1,0 +1,25 @@
+variables:
+
+  threads:
+    default: [1]
+    per_cluster:
+      cluster-a: [2, 4]
+      cluster-b: [4, 8]
+
+  dtype:
+    - float
+    - double
+    - char
+
+  array_size: [1000000] # few MBs
+
+
+jobs:
+  - config: "{threads}_threads"
+    config_jobs:
+      - tag: "job_{threads}_threads_{dtype}"
+        command: "bin/mem_bandwidth_{dtype} {array_size}"
+
+      # This is a duplicate 'dtype=double' job
+      - tag: "job_{threads}_threads_default_dtype"
+        command: "bin/mem_bandwidth {array_size}"

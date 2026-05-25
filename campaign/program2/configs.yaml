@@ -1,0 +1,10 @@
+cluster-a:
+  scheduler: local
+  configs:
+    - name: "empty_conf"
+
+cluster-b:
+  scheduler: local
+  configs:
+    - name: "empty_conf"
+      env: ['MAKE_IT_SLOW=1'] # 1 second artificial runtime penalty

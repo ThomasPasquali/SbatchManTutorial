@@ -1,0 +1,9 @@
+variables:
+  matrix_size: [32, 64, 128]
+  backend:     ['numpy', 'manual']
+
+jobs:
+  - config: "empty_conf"
+    config_jobs:
+      - tag: "matmul_{matrix_size}x{matrix_size}_{backend}"
+        command: "python matmul.py --size {matrix_size} --backend {backend}"
