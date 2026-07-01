@@ -9,6 +9,11 @@ jobs:
       - tag: "this_fails" # exitcode != 0
         command: "python3 programs/intro/fail.py"
 
+      - tag: "sbatchman_env_vars" # exitcode != 0
+        command: |
+          echo $SBATCHMAN_JOB_DIR
+          echo $SBATCHMAN_WD
+
   # This config has a timeout of 5 seconds
   - config: "mypc_config_timeout"
     # You can specify `command` here as well (shared across all tags)
