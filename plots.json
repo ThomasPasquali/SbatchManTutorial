@@ -1,0 +1,74 @@
+{
+  "version": 2,
+  "tabs": [
+    {
+      "version": 2,
+      "label": "Scaling",
+      "database": "data",
+      "sql": "SELECT * FROM pi\nWHERE samples = 50000000\nORDER BY threads",
+      "plotType": "line",
+      "chartTitle": "Strong Scaling",
+      "x": "threads",
+      "y": [
+        "runtime"
+      ],
+      "group": "dtype",
+      "z": "",
+      "xLabel": "",
+      "yLabel": "",
+      "xScale": "linear",
+      "yScale": "linear",
+      "xTickFmt": "",
+      "yTickFmt": "",
+      "extra": {
+        "mode": "lines+markers"
+      },
+      "customScript": "",
+      "columns": [
+        "threads",
+        "dtype",
+        "samples",
+        "pi_approx",
+        "runtime",
+        "job_id",
+        "status",
+        "cluster"
+      ]
+    },
+    {
+      "version": 2,
+      "label": "Precision",
+      "database": "data",
+      "sql": "SELECT *, ABS(pi_approx-PI()) AS err\nFROM pi\nORDER BY dtype",
+      "plotType": "line",
+      "chartTitle": "Appproximation Precision",
+      "x": "samples",
+      "y": [
+        "err"
+      ],
+      "group": "dtype",
+      "z": "",
+      "xLabel": "",
+      "yLabel": "Absolute Error",
+      "xScale": "log",
+      "yScale": "log",
+      "xTickFmt": "",
+      "yTickFmt": "",
+      "extra": {
+        "mode": "lines+markers"
+      },
+      "customScript": "",
+      "columns": [
+        "threads",
+        "dtype",
+        "samples",
+        "pi_approx",
+        "runtime",
+        "job_id",
+        "status",
+        "cluster",
+        "err"
+      ]
+    }
+  ]
+}

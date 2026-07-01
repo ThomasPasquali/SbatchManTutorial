@@ -2,6 +2,7 @@
 SbatchMan/
 test/
 campaign_results/
+**__pycache__
 
 programs/pi/compute_pi_*
 campaign/program1/bin/

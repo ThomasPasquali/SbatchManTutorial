@@ -1,3 +1,5 @@
+configs: "yaml_files/configs/pi.yaml"
+
 variables:
   # SbatchMan will compute the cartesian product of these values
   dtype: [float, double, float16]
