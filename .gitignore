@@ -6,4 +6,5 @@ campaign_results/
 
 programs/pi/compute_pi_*
 campaign/program1/bin/
+campaign/**/*.png
 pi_results.csv

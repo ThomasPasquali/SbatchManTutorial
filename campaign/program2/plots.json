@@ -1,0 +1,34 @@
+{
+  "version": 2,
+  "tabs": [
+    {
+      "version": 2,
+      "label": "Plot 1",
+      "database": "data",
+      "sql": "SELECT matrix_size, time_seconds, CONCAT_WS(\" | \", cluster_name, backend, make_it_slow) as label\nFROM matmul\nGROUP BY cluster_name, backend, make_it_slow, matrix_size\nORDER BY matrix_size",
+      "plotType": "line",
+      "chartTitle": "",
+      "x": "matrix_size",
+      "y": [
+        "time_seconds"
+      ],
+      "group": "label",
+      "z": "",
+      "xLabel": "",
+      "yLabel": "",
+      "xScale": "linear",
+      "yScale": "linear",
+      "xTickFmt": "",
+      "yTickFmt": "",
+      "extra": {
+        "mode": "lines+markers"
+      },
+      "customScript": "",
+      "columns": [
+        "matrix_size",
+        "time_seconds",
+        "label"
+      ]
+    }
+  ]
+}

@@ -83,4 +83,5 @@ ax.grid(True)
 ax.legend()
 
 plt.tight_layout()
+plt.savefig('matmul_runtimes.png')
 plt.show()
