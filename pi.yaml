@@ -1,0 +1,24 @@
+variables:
+  path: ["PathA", "PathB"]
+  threads: [1, 2]
+
+configs:
+  local_nocuda:
+    
+    scheduler: local
+    default_config:
+      env:
+        - "MY_PATH={path}"
+
+    configs:
+      - name: "{threads}_threads_{path}"
+        env:
+          - "OMP_NUM_THREADS={threads}"
+
+jobs:
+  - config: "{threads}_threads_{path}"
+    config_jobs:
+      - tag: "{path}"
+        command: |
+          echo "OMP_NUM_THREADS=$OMP_NUM_THREADS"
+          echo "MY_PATH=$MY_PATH"
