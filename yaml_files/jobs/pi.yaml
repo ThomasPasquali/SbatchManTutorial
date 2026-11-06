@@ -12,3 +12,4 @@ jobs:
   - config: "{threads}_threads"
     config_jobs:
       - tag: "{dtype}_{samples}"
+        category: "{dtype}"

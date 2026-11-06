@@ -1,34 +1,87 @@
 {
-  "version": 2,
+  "version": 3,
+  "activeTabIndex": 0,
   "tabs": [
     {
-      "version": 2,
+      "version": 3,
       "label": "Plot 1",
-      "database": "data",
-      "sql": "SELECT matrix_size, time_seconds, CONCAT_WS(\" | \", cluster_name, backend, make_it_slow) as label\nFROM matmul\nGROUP BY cluster_name, backend, make_it_slow, matrix_size\nORDER BY matrix_size",
-      "plotType": "line",
-      "chartTitle": "",
-      "x": "matrix_size",
-      "y": [
-        "time_seconds"
-      ],
-      "group": "label",
-      "z": "",
-      "xLabel": "",
-      "yLabel": "",
-      "xScale": "linear",
-      "yScale": "linear",
-      "xTickFmt": "",
-      "yTickFmt": "",
-      "extra": {
-        "mode": "lines+markers"
+      "mode": "grid",
+      "rendererBackend": "matplotlib",
+      "single": {
+        "database": "data",
+        "sql": "",
+        "plotType": "line",
+        "legendFieldSeparator": " | ",
+        "legendFieldFormat": "{column}={value}",
+        "showLegend": true,
+        "shortLegend": false,
+        "shortLegendLabels": {
+          "color": true,
+          "linestyle": true,
+          "marker": true
+        },
+        "errorStyle": "bars"
       },
-      "customScript": "",
-      "columns": [
-        "matrix_size",
-        "time_seconds",
-        "label"
-      ]
+      "grid": {
+        "rows": 1,
+        "cols": 1,
+        "activePanelIndex": 0,
+        "panels": [
+          {
+            "database": "data",
+            "sql": "SELECT matrix_size, time_seconds, cluster_name, backend as label\nFROM matmul\nGROUP BY cluster_name, backend, make_it_slow, matrix_size\nORDER BY matrix_size",
+            "plotType": "line",
+            "x": "matrix_size",
+            "y": [
+              "time_seconds"
+            ],
+            "group": [
+              "label"
+            ],
+            "dashBy": [
+              "cluster_name"
+            ],
+            "xLabel": "Matrix Size (NxN)",
+            "yLabel": "Runtime [s]",
+            "legendFieldSeparator": " @ ",
+            "legendFieldFormat": "{value}",
+            "showLegend": true,
+            "shortLegend": false,
+            "shortLegendLabels": {
+              "color": true,
+              "linestyle": true,
+              "marker": true
+            },
+            "errorStyle": "bars"
+          }
+        ],
+        "shareX": false,
+        "shareY": false,
+        "shareXMode": "none",
+        "shareYMode": "none",
+        "xgap": 0.2,
+        "ygap": 0.24,
+        "panelLabels": false,
+        "facetByGroup": false,
+        "legendPosition": "right",
+        "legendTitle": "",
+        "showLegend": true,
+        "shareLegend": true,
+        "facetGroupCols": [],
+        "facetAxis": "cols",
+        "facetCount": 2,
+        "groupBy": [],
+        "figureWidth": 0,
+        "figureHeight": 0,
+        "subplotWidth": 4,
+        "subplotHeight": 3.3,
+        "facetLabelFormat": "{column}={value}"
+      },
+      "style": {}
     }
+  ],
+  "style": {},
+  "script_paths": [
+    "../common"
   ]
 }
