@@ -1,74 +1,187 @@
 {
-  "version": 2,
+  "version": 3,
+  "activeTabIndex": 1,
   "tabs": [
     {
-      "version": 2,
+      "version": 3,
       "label": "Scaling",
-      "database": "data",
-      "sql": "SELECT * FROM pi\nWHERE samples = 50000000\nORDER BY threads",
-      "plotType": "line",
-      "chartTitle": "Strong Scaling",
-      "x": "threads",
-      "y": [
-        "runtime"
-      ],
-      "group": "dtype",
-      "z": "",
-      "xLabel": "",
-      "yLabel": "",
-      "xScale": "linear",
-      "yScale": "linear",
-      "xTickFmt": "",
-      "yTickFmt": "",
-      "extra": {
-        "mode": "lines+markers"
+      "mode": "grid",
+      "rendererBackend": "matplotlib",
+      "single": {
+        "database": "data",
+        "sql": "",
+        "plotType": "line",
+        "showLegend": true,
+        "shortLegend": false,
+        "shortLegendLabels": {
+          "color": true,
+          "linestyle": true,
+          "marker": true
+        },
+        "errorStyle": "bars"
       },
-      "customScript": "",
-      "columns": [
-        "threads",
-        "dtype",
-        "samples",
-        "pi_approx",
-        "runtime",
-        "job_id",
-        "status",
-        "cluster"
-      ]
+      "grid": {
+        "rows": 1,
+        "cols": 1,
+        "activePanelIndex": 0,
+        "panels": [
+          {
+            "database": "data",
+            "sql": "SELECT * FROM pi\nWHERE samples = 50000000",
+            "plotType": "line",
+            "chartTitle": "Strong Scaling",
+            "x": "threads",
+            "y": [
+              "runtime"
+            ],
+            "group": [
+              "dtype"
+            ],
+            "xLabel": "Threads",
+            "yLabel": "Runtime [s]",
+            "xScale": "log2",
+            "xTickFmt": ".0f",
+            "showLegend": true,
+            "shortLegend": false,
+            "shortLegendLabels": {
+              "color": true,
+              "linestyle": true,
+              "marker": true
+            },
+            "layoutScript": "def customize_matplotlib(fig, ax, config):\n    add_zoom_inset(\n        ax,\n        zoom_region=(3.0, 17.0, 0.05, 0.2),  # x1, x2, y1, y2\n        inset_position=(0.38, 0.58, 0.6, 0.35),  # x, y, width, height\n        draw_rect=True,\n        rect_scaling=1.0,\n        zoom_ax_kwargs={\n            'grid': {'visible': True, 'alpha': 0.25},\n            'tick_params': {'labelsize': 7},\n        },\n    )",
+            "errorStyle": "bars"
+          }
+        ],
+        "shareX": false,
+        "shareY": false,
+        "shareXMode": "none",
+        "shareYMode": "none",
+        "xgap": 0.2,
+        "ygap": 0.24,
+        "panelLabels": false,
+        "facetByGroup": false,
+        "legendPosition": "right",
+        "legendTitle": "",
+        "showLegend": true,
+        "shareLegend": true,
+        "facetGroupCols": [],
+        "facetAxis": "cols",
+        "facetCount": 2,
+        "groupBy": [],
+        "figureWidth": 0,
+        "figureHeight": 0,
+        "subplotWidth": 4,
+        "subplotHeight": 3.3,
+        "facetLabelFormat": "{column}={value}"
+      },
+      "style": {
+        "width_in": 0,
+        "height_in": 0,
+        "label_size": 12,
+        "tick_size": 11,
+        "legend_size": 11,
+        "title_size": 14,
+        "line_width": 2,
+        "marker_size": 7
+      }
     },
     {
-      "version": 2,
+      "version": 3,
       "label": "Precision",
-      "database": "data",
-      "sql": "SELECT *, ABS(pi_approx-PI()) AS err\nFROM pi\nORDER BY dtype",
-      "plotType": "line",
-      "chartTitle": "Appproximation Precision",
-      "x": "samples",
-      "y": [
-        "err"
-      ],
-      "group": "dtype",
-      "z": "",
-      "xLabel": "",
-      "yLabel": "Absolute Error",
-      "xScale": "log",
-      "yScale": "log",
-      "xTickFmt": "",
-      "yTickFmt": "",
-      "extra": {
-        "mode": "lines+markers"
+      "mode": "grid",
+      "rendererBackend": "matplotlib",
+      "single": {
+        "database": "data",
+        "sql": "",
+        "plotType": "line",
+        "showLegend": true,
+        "shortLegend": false,
+        "shortLegendLabels": {
+          "color": true,
+          "linestyle": true,
+          "marker": true
+        },
+        "errorStyle": "bars"
       },
-      "customScript": "",
-      "columns": [
-        "threads",
-        "dtype",
-        "samples",
-        "pi_approx",
-        "runtime",
-        "job_id",
-        "status",
-        "cluster",
-        "err"
-      ]
+      "grid": {
+        "rows": 1,
+        "cols": 1,
+        "activePanelIndex": 0,
+        "panels": [
+          {
+            "database": "data",
+            "sql": "SELECT *, ABS(pi_approx-PI()) AS err\nFROM pi\nWHERE threads IN (1, 16)",
+            "plotType": "line",
+            "chartTitle": "Appproximation Precision",
+            "x": "samples",
+            "y": [
+              "err"
+            ],
+            "group": [
+              "dtype"
+            ],
+            "dashBy": [
+              "threads"
+            ],
+            "xLabel": "# Samples",
+            "yLabel": "Absolute Error",
+            "xScale": "log",
+            "yScale": "log",
+            "showLegend": true,
+            "shortLegend": true,
+            "shortLegendLabels": {
+              "color": true,
+              "linestyle": true,
+              "marker": true
+            },
+            "errorStyle": "bars"
+          }
+        ],
+        "shareX": false,
+        "shareY": false,
+        "shareXMode": "none",
+        "shareYMode": "none",
+        "xgap": 0.2,
+        "ygap": 0.24,
+        "panelLabels": false,
+        "facetByGroup": false,
+        "legendPosition": "right",
+        "legendTitle": "",
+        "showLegend": true,
+        "shareLegend": true,
+        "facetGroupCols": [],
+        "facetAxis": "cols",
+        "facetCount": 2,
+        "groupBy": [],
+        "figureWidth": 0,
+        "figureHeight": 0,
+        "subplotWidth": "8",
+        "subplotHeight": "4",
+        "facetLabelFormat": "{column}={value}"
+      },
+      "style": {
+        "width_in": 0,
+        "height_in": 0,
+        "label_size": 12,
+        "tick_size": 11,
+        "legend_size": 11,
+        "title_size": 14,
+        "line_width": 2,
+        "marker_size": 7
+      }
     }
+  ],
+  "style": {
+    "width_in": 0,
+    "height_in": 0,
+    "label_size": 12,
+    "tick_size": 11,
+    "legend_size": 11,
+    "title_size": 14,
+    "line_width": 2,
+    "marker_size": 7
+  },
+  "script_paths": [
+    "../common"
   ]
 }
