@@ -8,7 +8,7 @@
       "mode": "grid",
       "rendererBackend": "matplotlib",
       "single": {
-        "database": "data_csv",
+        "database": "data",
         "sql": "",
         "plotType": "line",
         "xLabelHidden": false,
@@ -26,14 +26,14 @@
       },
       "grid": {
         "rows": 1,
-        "cols": 1,
-        "activePanelIndex": 0,
+        "cols": 2,
+        "activePanelIndex": 1,
         "panels": [
           {
-            "database": "data_csv",
-            "sql": "SELECT * FROM pi\nWHERE samples = 50000000",
+            "database": "data",
+            "sql": "SELECT * FROM pi\nWHERE samples = 50000000\n  AND dtype != 'float16'",
             "plotType": "line",
-            "chartTitle": "Strong Scaling",
+            "chartTitle": "Strong Scaling - 50M iterations",
             "x": "threads",
             "y": [
               "runtime"
@@ -58,12 +58,41 @@
             },
             "layoutScript": "def customize_matplotlib(fig, ax, config):\n    add_zoom_inset(\n        ax,\n        zoom_region=(3.0, 17.0, 0.05, 0.2),  # x1, x2, y1, y2\n        inset_position=(0.38, 0.58, 0.6, 0.35),  # x, y, width, height\n        draw_rect=True,\n        rect_scaling=1.0,\n        zoom_ax_kwargs={\n            'grid': {'visible': True, 'alpha': 0.25},\n            'tick_params': {'labelsize': 7},\n        },\n    )",
             "errorStyle": "bars"
+          },
+          {
+            "database": "data",
+            "sql": "SELECT * FROM pi\nWHERE samples = 100\n  AND dtype != 'float16'",
+            "plotType": "line",
+            "chartTitle": "Strong Scaling - 100 iterations",
+            "x": "threads",
+            "y": [
+              "runtime"
+            ],
+            "group": [
+              "dtype"
+            ],
+            "xLabel": "Threads",
+            "yLabel": "Runtime [s]",
+            "xLabelHidden": false,
+            "yLabelHidden": false,
+            "xScale": "log2",
+            "xTickFmt": ".0f",
+            "legendFieldSeparator": " | ",
+            "legendFieldFormat": "{value}",
+            "showLegend": true,
+            "shortLegend": false,
+            "shortLegendLabels": {
+              "color": true,
+              "linestyle": true,
+              "marker": true
+            },
+            "errorStyle": "bars"
           }
         ],
         "shareX": false,
         "shareY": false,
         "shareXMode": "none",
-        "shareYMode": "none",
+        "shareYMode": "label",
         "xgap": 0.2,
         "ygap": 0.24,
         "panelLabels": false,
@@ -99,7 +128,7 @@
       "mode": "grid",
       "rendererBackend": "matplotlib",
       "single": {
-        "database": "data_csv",
+        "database": "data",
         "sql": "",
         "plotType": "line",
         "xLabelHidden": false,
@@ -121,8 +150,8 @@
         "activePanelIndex": 0,
         "panels": [
           {
-            "database": "data_csv",
-            "sql": "SELECT *, ABS(pi_approx-PI()) AS err\nFROM pi\nWHERE threads IN (1, 16)",
+            "database": "data",
+            "sql": "SELECT *, ABS(pi_approx-PI()) AS err\nFROM pi\nWHERE threads IN (1, 16)\n  AND dtype != 'float16'",
             "plotType": "line",
             "chartTitle": "Appproximation Precision",
             "x": "samples",
@@ -135,7 +164,7 @@
             "dashBy": [
               "threads"
             ],
-            "xLabel": "# Samples",
+            "xLabel": "# Iterations",
             "yLabel": "Absolute Error",
             "xLabelHidden": false,
             "yLabelHidden": false,
@@ -192,7 +221,7 @@
       "mode": "facet",
       "rendererBackend": "matplotlib",
       "single": {
-        "database": "data_csv",
+        "database": "data",
         "sql": "",
         "plotType": "line",
         "xLabelHidden": false,
@@ -214,8 +243,8 @@
         "activePanelIndex": 0,
         "panels": [
           {
-            "database": "data_csv",
-            "sql": "SELECT *, ABS(pi_approx-PI()) AS err\nFROM pi\nWHERE threads IN (1, 8, 16)",
+            "database": "data",
+            "sql": "SELECT *, ABS(pi_approx-PI()) AS err\nFROM pi\nWHERE threads IN (1, 8, 16)\n  AND dtype != 'float16'\nORDER BY threads",
             "plotType": "line",
             "chartTitle": "Appproximation Precision",
             "x": "samples",
@@ -225,7 +254,7 @@
             "group": [
               "dtype"
             ],
-            "xLabel": "# Samples",
+            "xLabel": "# Iterations",
             "yLabel": "Absolute Error",
             "xLabelHidden": false,
             "yLabelHidden": false,
